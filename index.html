@@ -3,48 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sumeet Elko - Live Dashboard</title>
+    <title>Sumeet Elko - Live Tracker</title>
     <style>
         :root { --primary: #1b5e20; --dark: #0a3d0d; --blue: #0d47a1; --bg: #f4f7f6; --white: #ffffff; --wa: #25D366; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding: 15px; }
         .container { max-width: 1400px; margin: auto; }
         
-        /* Logo on Green Header */
+        /* Header with Logo */
         .main-header { 
             background: linear-gradient(135deg, var(--primary), var(--dark)); 
             color: white; padding: 20px; border-radius: 15px; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
             display: flex; align-items: center; justify-content: center; gap: 20px;
-            margin-bottom: 25px;
+            margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
-        .company-logo { height: 60px; width: auto; border-radius: 5px; background: white; padding: 5px; }
-        .header-text h1 { margin: 0; font-size: 2.2rem; letter-spacing: 1px; }
-        .header-text p { margin: 0; opacity: 0.9; font-size: 0.9rem; }
+        .company-logo { height: 70px; width: auto; background: white; padding: 5px; border-radius: 8px; }
+        .header-text h1 { margin: 0; font-size: 2rem; letter-spacing: 1px; }
+        .header-text p { margin: 0; opacity: 0.8; font-size: 0.9rem; }
 
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        /* Dashboard */
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
         .stat-card { background: var(--white); padding: 20px; border-radius: 15px; text-align: center; border-top: 5px solid var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .stat-card h3 { margin: 0; font-size: 0.85rem; color: #666; }
         .value { font-size: 1.8rem; font-weight: bold; margin-top: 10px; color: var(--dark); }
-        
-        .content-grid { display: grid; grid-template-columns: 400px 1fr; gap: 20px; }
+
+        /* Main Content */
+        .content-grid { display: grid; grid-template-columns: 380px 1fr; gap: 20px; }
         .panel { background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        
+        h2 { margin-top: 0; font-size: 1.2rem; color: var(--dark); border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
+
         input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1.5px solid #eee; border-radius: 8px; box-sizing: border-box; }
-        .trip-box { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: #f9f9f9; padding: 10px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--primary); }
+        .trip-box { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: #f9f9f9; padding: 10px; border-radius: 10px; margin-bottom: 8px; border-left: 4px solid var(--primary); }
         
         .btn-save { background: var(--primary); color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
-        .btn-save:disabled { background: #666; cursor: not-allowed; }
+        .btn-save:disabled { background: #888; }
 
-        table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.85rem; }
-        th { background: #f1f8e9; padding: 12px; border-bottom: 2px solid #ddd; }
+        /* Table */
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+        th { background: #f1f8e9; padding: 12px; border-bottom: 2px solid #ddd; text-align: center; }
         td { padding: 12px; text-align: center; border-bottom: 1px solid #eee; }
         
-        .badge { padding: 3px 7px; border-radius: 4px; color: white; font-size: 0.7rem; }
-        .btn-action { border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer; color: white; margin: 2px; }
+        .badge { padding: 3px 7px; border-radius: 4px; color: white; font-size: 0.7rem; font-weight: bold; }
+        .btn-wa { background: var(--wa); border: none; padding: 6px 10px; border-radius: 5px; color: white; cursor: pointer; }
 
-        @media (max-width: 1000px) { 
-            .content-grid { grid-template-columns: 1fr; }
-            .main-header { flex-direction: column; text-align: center; }
-        }
+        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -54,7 +56,7 @@
         <img src="logo.png" alt="Logo" class="company-logo" onerror="this.style.display='none'">
         <div class="header-text">
             <h1>SUMEET ELKO</h1>
-            <p>Mothe Gaon Waste Tracking Dashboard</p>
+            <p>Waste Tracking & Monitoring | Mothe Gaon</p>
         </div>
     </div>
 
@@ -67,22 +69,22 @@
 
     <div class="content-grid">
         <div class="panel">
-            <h2>नवीन एन्ट्री</h2>
+            <h2>नवी एन्ट्री</h2>
             <form id="wasteForm">
                 <input type="date" id="date" required>
                 <input type="text" id="sName" placeholder="सुपरवायझरचे नाव" required>
-                <input type="text" id="vehicle" placeholder="गाडी क्रमांक" required>
+                <input type="text" id="vehicle" placeholder="उदा. MH 05 AB 1234" required>
                 
                 <div class="trip-box">
-                    <input type="number" id="t1" placeholder="T1 (kg)" value="0">
+                    <input type="number" id="t1" placeholder="Trip 1 (kg)" value="0">
                     <select id="ty1"><option value="Wet">Wet</option><option value="Mix">Mix</option></select>
                 </div>
-                <div class="trip-box">
-                    <input type="number" id="t2" placeholder="T2 (kg)" value="0">
+                <div class="trip-box" style="border-left-color: var(--blue);">
+                    <input type="number" id="t2" placeholder="Trip 2 (kg)" value="0">
                     <select id="ty2"><option value="Wet">Wet</option><option value="Mix">Mix</option></select>
                 </div>
-                <div class="trip-box">
-                    <input type="number" id="t3" placeholder="T3 (kg)" value="0">
+                <div class="trip-box" style="border-left-color: #d32f2f;">
+                    <input type="number" id="t3" placeholder="Trip 3 (kg)" value="0">
                     <select id="ty3"><option value="Wet">Wet</option><option value="Mix">Mix</option></select>
                 </div>
 
@@ -93,54 +95,56 @@
 
         <div class="panel">
             <div style="display:flex; justify-content: space-between; align-items:center;">
-                <h2>लाईव्ह अहवाल</h2>
-                <input type="date" id="filterDate" onchange="updateDisplay()">
+                <h2>दैनिक रिपोर्ट</h2>
+                <input type="date" id="filterDate" style="width:150px;" onchange="renderTable()">
             </div>
-            <div id="status" style="font-size: 0.8rem; color: var(--blue); margin-top: 5px;"></div>
-            <table>
-                <thead>
-                    <tr><th>गाडी</th><th>Trip 1</th><th>Trip 2</th><th>Trip 3</th><th>एकूण</th><th>कृती</th></tr>
-                </thead>
-                <tbody id="tableBody"></tbody>
-            </table>
+            <div id="loading" style="color: var(--blue); font-size: 0.8rem; margin: 10px 0;">डेटा लोड होत आहे...</div>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>गाडी क्रमांक</th><th>T1</th><th>T2</th><th>T3</th><th>एकूण</th><th>WA</th></tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxq1tG6EHLNqeeBr0UMGEwpmUYo_07AfSUYzTvrSBUn1mF-FYb4-pINmDUoDnuKNV-WoQ/exec"; 
-    let cloudData = [];
+    const SCRIPT_URL = "YOUR_GOOGLE_SCRIPT_URL_HERE"; // तुमची Google Script URL इथे टाका
+    let fullData = [];
 
+    // डिफॉल्ट तारीख सेट करणे
     document.getElementById('date').value = new Date().toISOString().split('T')[0];
     document.getElementById('filterDate').value = new Date().toISOString().split('T')[0];
 
-    // डॅशबोर्ड अपडेट करण्यासाठी डेटा ओढणे
-    async function refreshData() {
-        document.getElementById('status').innerText = "Syncing with cloud...";
+    // क्लाउडवरून डेटा खेचणे
+    async function loadData() {
+        const loader = document.getElementById('loading');
+        loader.style.display = "block";
         try {
             const res = await fetch(SCRIPT_URL);
-            const rawData = await res.json();
-            // डेटा आला की नाही हे चेक करा
-            if (rawData && rawData.length >= 0) {
-                cloudData = rawData;
-                localStorage.setItem('sumeet_cache', JSON.stringify(cloudData));
-                updateDisplay();
-                document.getElementById('status').innerText = "Cloud Synced ✅";
+            const data = await res.json();
+            if (data) {
+                fullData = data;
+                renderTable();
+                loader.innerText = "डेटा अपडेट झाला आहे.";
             }
         } catch (e) {
-            console.log("Offline mode");
-            cloudData = JSON.parse(localStorage.getItem('sumeet_cache')) || [];
-            updateDisplay();
-            document.getElementById('status').innerText = "Offline Mode (Using Cache)";
+            loader.innerText = "डेटा लोड करताना त्रुटी आली.";
+            console.error(e);
         }
+        setTimeout(() => loader.style.display = "none", 2000);
     }
 
+    // फॉर्म सबमिट करणे
     document.getElementById('wasteForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = document.getElementById('submitBtn');
-        btn.innerText = "Saving..."; btn.disabled = true;
+        btn.innerText = "Processing..."; btn.disabled = true;
 
-        const entry = {
+        const payload = {
             date: document.getElementById('date').value,
             sName: document.getElementById('sName').value,
             vehicle: document.getElementById('vehicle').value.toUpperCase(),
@@ -151,66 +155,64 @@
         };
 
         try {
-            await fetch(SCRIPT_URL, { 
-                method: 'POST', 
-                mode: 'no-cors', 
-                body: JSON.stringify(entry) 
-            });
-            alert("Entry Saved!");
+            await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
+            alert("Entry Saved Successfully!");
             e.target.reset();
             document.getElementById('date').value = new Date().toISOString().split('T')[0];
-            // सेव्ह केल्यावर ३ सेकंदानंतर रिफ्रेश करा
-            setTimeout(refreshData, 3000);
-        } catch (err) { alert("Save Failed!"); }
-        
+            // सेव्ह झाल्यावर ५ सेकंदांनी रिफ्रेश करा
+            setTimeout(loadData, 5000);
+        } catch (err) {
+            alert("Error saving data.");
+        }
         btn.innerText = "डेटा सेव्ह करा"; btn.disabled = false;
     });
 
-    function updateDisplay() {
+    // टेबल आणि डॅशबोर्ड रेंडर करणे
+    function renderTable() {
         const tbody = document.getElementById('tableBody');
         const fDate = document.getElementById('filterDate').value;
         tbody.innerHTML = '';
+        
         let tV = 0, tW = 0, aW = 0;
 
-        cloudData.forEach((item, index) => {
-            const sum = (item.t1 || 0) + (item.t2 || 0) + (item.t3 || 0);
-            aW += sum;
-            
-            // तारीख मॅचिंग सुधारणा
-            let itemDateStr = "";
-            try { itemDateStr = new Date(item.date).toISOString().split('T')[0]; } catch(e) { itemDateStr = item.date; }
+        fullData.forEach((item, index) => {
+            const totalRow = (item.t1 || 0) + (item.t2 || 0) + (item.t3 || 0);
+            aW += totalRow;
 
-            if(itemDateStr === fDate) {
-                tV++; tW += sum;
+            // तारीख चेक (Google Sheet मध्ये तारीख फॉरमॅट वेगळा असू शकतो)
+            let itemD = "";
+            try { itemD = new Date(item.date).toISOString().split('T')[0]; } catch(e) { itemD = item.date; }
+
+            if (itemD === fDate) {
+                tV++;
+                tW += totalRow;
                 tbody.innerHTML += `<tr>
                     <td><b>${item.vehicle}</b><br><small>${item.sName}</small></td>
-                    <td>${item.t1} <span class="badge" style="background:${item.ty1=='Wet'?'#2e7d32':'#d32f2f'}">${item.ty1}</span></td>
-                    <td>${item.t2} <span class="badge" style="background:${item.ty2=='Wet'?'#2e7d32':'#d32f2f'}">${item.ty2}</span></td>
-                    <td>${item.t3} <span class="badge" style="background:${item.ty3=='Wet'?'#2e7d32':'#d32f2f'}">${item.ty3}</span></td>
-                    <td style="font-weight:bold; color:var(--primary)">${sum} kg</td>
-                    <td>
-                        <button class="btn-action" style="background:var(--wa)" onclick="sendWA(${index})">WA</button>
-                    </td>
+                    <td>${item.t1} <span class="badge ${item.ty1=='Wet'?'bg-wet':'bg-mix'}" style="background:${item.ty1=='Wet'?'#2e7d32':'#d32f2f'}">${item.ty1}</span></td>
+                    <td>${item.t2} <span class="badge ${item.ty2=='Wet'?'bg-wet':'bg-mix'}" style="background:${item.ty2=='Wet'?'#2e7d32':'#d32f2f'}">${item.ty2}</span></td>
+                    <td>${item.t3} <span class="badge ${item.ty3=='Wet'?'bg-wet':'bg-mix'}" style="background:${item.ty3=='Wet'?'#2e7d32':'#d32f2f'}">${item.ty3}</span></td>
+                    <td><b>${totalRow} kg</b></td>
+                    <td><button class="btn-wa" onclick="sendWA(${index})">WA</button></td>
                 </tr>`;
             }
         });
 
         document.getElementById('today-v').innerText = tV;
         document.getElementById('today-w').innerText = tW + " kg";
-        document.getElementById('all-v').innerText = cloudData.length;
+        document.getElementById('all-v').innerText = fullData.length;
         document.getElementById('all-w').innerText = aW + " kg";
     }
 
     function sendWA(idx) {
-        const i = cloudData[idx];
-        const msg = `*SUMEET ELKO*%0AVehicle: ${i.vehicle}%0ATotal: ${i.t1+i.t2+i.t3} kg`;
+        const i = fullData[idx];
+        const msg = `*SUMEET ELKO REPORT*%0AVehicle: ${i.vehicle}%0ATotal: ${i.t1+i.t2+i.t3} kg%0ARemark: ${i.remark}`;
         window.open(`https://wa.me/?text=${msg}`, '_blank');
     }
 
-    // ऑटोमॅटिक सुरू करा
-    refreshData();
-    // दर ३० सेकंदाला अपडेट करा
-    setInterval(refreshData, 30000);
+    // ऑटो लोड
+    loadData();
+    // दर मिनिटाला ऑटो रिफ्रेश
+    setInterval(loadData, 60000);
 </script>
 </body>
 </html>
