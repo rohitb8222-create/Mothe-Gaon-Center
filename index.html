@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumeet Elko - Live Dashboard</title>
+    <style>
+        :root { 
+            --primary: #1b5e20; 
+            --dark: #0a3d0d;
+            --blue: #0d47a1; 
+            --bg: #f4f7f6; 
+            --white: #ffffff; 
+            --whatsapp: #25D366; 
+            --copy: #455a64;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); margin: 0; padding: 20px; }
+        .container { max-width: 1400px; margin: auto; }
+
+        /* Header */
+        .main-header { 
+            text-align: center; 
+            background: linear-gradient(135deg, var(--primary), var(--dark)); 
+            color: white; 
+            padding: 30px; 
+            border-radius: 20px; 
+            margin-bottom: 25px; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .main-header h1 { margin: 0; font-size: 2.8rem; letter-spacing: 2px; }
+
+        /* Dashboard Cards */
+        .dashboard-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
+            gap: 20px; 
+            margin-bottom: 30px; 
+        }
+        .stat-card { 
+            background: var(--white); 
+            padding: 25px; 
+            border-radius: 18px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+            text-align: center; 
+            border-top: 6px solid var(--primary);
+            transition: transform 0.3s;
+        }
+        .stat-card:hover { transform: translateY(-5px); }
+        .stat-card h3 { margin: 0; font-size: 0.9rem; color: #666; text-transform: uppercase; }
+        .value { font-size: 2rem; font-weight: bold; margin-top: 10px; color: var(--dark); }
+
+        /* Layout Grid */
+        .content-grid { display: grid; grid-template-columns: 450px 1fr; gap: 25px; }
+
+        .panel { 
+            background: var(--white); 
+            padding: 25px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+        }
+
+        h2 { border-bottom: 2px solid #eee; padding-bottom: 15px; margin-top: 0; color: var(--dark); }
+
+        /* Form Elements */
+        label { display: block; font-size: 0.9rem; font-weight: bold; margin: 15px 0 5px; color: #444; }
+        input, select { 
+            width: 100%; padding: 12px; border: 1.5px solid #eee; border-radius: 10px; 
+            box-sizing: border-box; background: #fafafa; font-size: 1rem;
+        }
+        input:focus { border-color: var(--primary); outline: none; background: #fff; }
+
+        .trip-box { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 10px; 
+            background: #f9f9f9; padding: 15px; border-radius: 12px; margin-bottom: 10px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .btn-save { 
+            background: var(--primary); color: white; border: none; padding: 18px; 
+            width: 100%; border-radius: 12px; font-weight: bold; cursor: pointer; 
+            font-size: 1.1rem; margin-top: 20px; box-shadow: 0 5px 15px rgba(27, 94, 32, 0.3);
+        }
+        .btn-save:disabled { background: #ccc; }
+
+        /* Table & Actions */
+        .filter-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #f1f8e9; padding: 15px; text-align: center; color: var(--dark); border-bottom: 2px solid #eee; }
+        td { padding: 15px; text-align: center; border-bottom: 1px solid #f0f0f0; }
+
+        .btn-group { display: flex; gap: 5px; justify-content: center; }
+        .btn-action { border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; color: white; font-weight: bold; font-size: 0.8rem; }
+        .bg-wa { background: var(--whatsapp); }
+        .bg-copy { background: var(--copy); }
+
+        .badge { padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; color: white; }
+        .bg-wet { background: #2e7d32; }
+        .bg-mix { background: #d32f2f; }
+
+        @media (max-width: 1100px) { .content-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="main-header">
+        <h1>SUMEET ELKO</h1>
+        <p>Advanced Waste Monitoring System | Mothe Gaon Center</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="stat-card"><h3>आजच्या एकूण गाड्या</h3><div id="today-v" class="value">0</div></div>
+        <div class="stat-card"><h3>आजचे एकूण वजन</h3><div id="today-w" class="value">0 kg</div></div>
+        <div class="stat-card" style="border-top-color: var(--blue);"><h3>एकूण गाड्या (Lifetime)</h3><div id="all-v" class="value" style="color:var(--blue)">0</div></div>
+        <div class="stat-card" style="border-top-color: var(--blue);"><h3>एकूण वजन (Lifetime)</h3><div id="all-w" class="value" style="color:var(--blue)">0 kg</div></div>
+    </div>
+
+    <div class="content-grid">
+        <div class="panel">
+            <h2>नवीन एन्ट्री</h2>
+            <form id="wasteForm">
+                <label>तारीख</label>
+                <input type="date" id="date" required>
+                
+                <label>सुपरवायझरचे नाव</label>
+                <input type="text" id="sName" placeholder="सुपरवायझरचे नाव टाका" required>
+
+                <label>गाडी क्रमांक</label>
+                <input type="text" id="vehicle" placeholder="उदा. MH 05 AB 1234" required>
+
+                <label>ट्रिप तपशील (Weight & Type)</label>
+                <div class="trip-box">
+                    <input type="number" id="t1" placeholder="Trip 1 (kg)" value="0">
+                    <select id="ty1"><option value="Wet">Wet</option><option value="Mix">Mix</option></select>
+                </div>
+                <div class="trip-box" style="border-left-color: var(--blue);">
+                    <input type="number" id="t2" placeholder="Trip 2 (kg)" value="0">
+                    <select id="ty2"><option value="Wet">Wet</option><option value="Mix">Mix</option></select>
+                </div>
+                <div class="trip-box" style="border-left-color: #e65100;">
+                    <input type="number" id="t3" placeholder="Trip 3 (kg)" value="0">
+                    <select id="ty3"><option value="Wet">Wet</option><option value="Mix">Mix</option></select>
+                </div>
+
+                <label>रिमार्क / वॉर्ड</label>
+                <input type="text" id="remark" placeholder="काही विशेष माहिती">
+
+                <button type="submit" id="submitBtn" class="btn-save">सेव्ह करा & क्लाउड सिंक</button>
+            </form>
+        </div>
+
+        <div class="panel">
+            <div class="filter-row">
+                <h2 style="border:none; margin:0;">दैनिक अहवाल</h2>
+                <input type="date" id="filterDate" style="width:160px;" onchange="updateView()">
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>गाडी / सुपरवायझर</th>
+                        <th>Trip 1</th>
+                        <th>Trip 2</th>
+                        <th>Trip 3</th>
+                        <th>एकूण वजन</th>
+                        <th>कृती</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody"></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxq1tG6EHLNqeeBr0UMGEwpmUYo_07AfSUYzTvrSBUn1mF-FYb4-pINmDUoDnuKNV-WoQ/exec"; // तुमची Google Script URL इथे पेस्ट करा
+    let db = JSON.parse(localStorage.getItem('sumeetFinalDB')) || [];
+
+    const todayStr = new Date().toISOString().split('T')[0];
+    document.getElementById('date').value = todayStr;
+    document.getElementById('filterDate').value = todayStr;
+
+    document.getElementById('wasteForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        btn.innerText = "Sync होत आहे...";
+        btn.disabled = true;
+
+        const entry = {
+            date: document.getElementById('date').value,
+            sName: document.getElementById('sName').value,
+            vehicle: document.getElementById('vehicle').value.toUpperCase(),
+            t1: parseFloat(document.getElementById('t1').value) || 0, ty1: document.getElementById('ty1').value,
+            t2: parseFloat(document.getElementById('t2').value) || 0, ty2: document.getElementById('ty2').value,
+            t3: parseFloat(document.getElementById('t3').value) || 0, ty3: document.getElementById('ty3').value,
+            remark: document.getElementById('remark').value || "-"
+        };
+
+        try {
+            await fetch(SCRIPT_URL, { method: 'POST', body: JSON.stringify(entry) });
+            db.push(entry);
+            localStorage.setItem('sumeetFinalDB', JSON.stringify(db));
+            updateView();
+            alert("Data Successfully Synced to Sheet!");
+            document.getElementById('vehicle').value = '';
+            document.getElementById('t1').value = '0'; document.getElementById('t2').value = '0'; document.getElementById('t3').value = '0';
+        } catch (err) {
+            alert("Network Error! Data saved locally.");
+            db.push(entry);
+            localStorage.setItem('sumeetFinalDB', JSON.stringify(db));
+            updateView();
+        }
+        btn.innerText = "सेव्ह करा & क्लाउड सिंक";
+        btn.disabled = false;
+    });
+
+    function getFormatedText(index) {
+        const i = db[index];
+        const total = i.t1 + i.t2 + i.t3;
+        return `*SUMEET ELKO - WASTE REPORT*%0A---------------------------%0A*Date:* ${i.date}%0A*Sup:* ${i.sName}%0A*Vehicle:* ${i.vehicle}%0A*Trip 1:* ${i.t1} (${i.ty1})%0A*Trip 2:* ${i.t2} (${i.ty2})%0A*Trip 3:* ${i.t3} (${i.ty3})%0A*Total:* ${total} kg%0A*Remark:* ${i.remark}`;
+    }
+
+    function copyReport(index) {
+        const i = db[index];
+        const total = i.t1 + i.t2 + i.t3;
+        const text = `SUMEET ELKO REPORT\nDate: ${i.date}\nSup: ${i.sName}\nVehicle: ${i.vehicle}\nT1: ${i.t1} (${i.ty1})\nT2: ${i.t2} (${i.ty2})\nT3: ${i.t3} (${i.ty3})\nTotal: ${total} kg\nRemark: ${i.remark}`;
+        navigator.clipboard.writeText(text);
+        alert("रिपोर्ट कॉपी झाला!");
+    }
+
+    function updateView() {
+        const tableBody = document.getElementById('tableBody');
+        const fDate = document.getElementById('filterDate').value;
+        tableBody.innerHTML = '';
+        let tV = 0, tW = 0, aW = 0;
+
+        db.forEach((item, index) => {
+            const sum = item.t1 + item.t2 + item.t3;
+            aW += sum;
+            if(item.date === fDate) {
+                tV++; tW += sum;
+                tableBody.innerHTML += `<tr>
+                    <td><b>${item.vehicle}</b><br><small>${item.sName}</small></td>
+                    <td>${item.t1}<br><span class="badge ${item.ty1=='Wet'?'bg-wet':'bg-mix'}">${item.ty1}</span></td>
+                    <td>${item.t2}<br><span class="badge ${item.ty2=='Wet'?'bg-wet':'bg-mix'}">${item.ty2}</span></td>
+                    <td>${item.t3}<br><span class="badge ${item.ty3=='Wet'?'bg-wet':'bg-mix'}">${item.ty3}</span></td>
+                    <td><b style="color:var(--primary)">${sum} kg</b></td>
+                    <td>
+                        <div class="btn-group">
+                            <button class="btn-action bg-wa" onclick="window.open('https://wa.me/?text='+getFormatedText(${index}), '_blank')">WA</button>
+                            <button class="btn-action bg-copy" onclick="copyReport(${index})">Copy</button>
+                        </div>
+                    </td>
+                </tr>`;
+            }
+        });
+        document.getElementById('today-v').innerText = tV;
+        document.getElementById('today-w').innerText = tW + " kg";
+        document.getElementById('all-v').innerText = db.length;
+        document.getElementById('all-w').innerText = aW + " kg";
+    }
+    updateView();
+</script>
+</body>
+</html>
