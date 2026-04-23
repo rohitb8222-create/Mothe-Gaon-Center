@@ -3,52 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sumeet Elko | Waste Management Pro</title>
+    <title>Sumeet Elko | Waste Tracker</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
         :root { --primary: #1b5e20; --dark: #0a3d0d; --blue: #0d47a1; --bg: #f0f2f5; --white: #ffffff; }
-        
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: #333; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; padding: 15px; color: #333; }
         .container { max-width: 1400px; margin: auto; }
 
-        /* Header */
         .main-header { 
             background: linear-gradient(135deg, var(--primary), var(--dark)); 
-            color: white; padding: 25px; border-radius: 15px; 
-            display: flex; align-items: center; justify-content: center; gap: 25px;
-            margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            color: white; padding: 20px; border-radius: 15px; 
+            display: flex; align-items: center; justify-content: center; gap: 20px;
+            margin-bottom: 25px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);
         }
-        .logo { height: 65px; background: white; padding: 5px; border-radius: 10px; }
-        .header-text h1 { margin: 0; font-size: 2.2rem; letter-spacing: 1px; }
-        .header-text p { margin: 0; opacity: 0.8; font-size: 0.9rem; }
+        .logo { height: 60px; background: white; padding: 5px; border-radius: 8px; }
+        .header-text h1 { margin: 0; font-size: 1.8rem; letter-spacing: 1px; }
 
-        /* Dashboard */
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
-        .stat-card { background: var(--white); padding: 20px; border-radius: 15px; text-align: center; border-bottom: 5px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .stat-card h3 { margin: 0; font-size: 0.8rem; color: #777; text-transform: uppercase; }
-        .value { font-size: 1.8rem; font-weight: 700; margin-top: 8px; color: var(--dark); }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-bottom: 25px; }
+        .stat-card { background: var(--white); padding: 20px; border-radius: 12px; text-align: center; border-bottom: 5px solid var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .stat-card h3 { margin: 0; font-size: 0.75rem; color: #777; text-transform: uppercase; }
+        .value { font-size: 1.6rem; font-weight: 700; margin-top: 5px; color: var(--dark); }
 
-        /* Content */
-        .content-grid { display: grid; grid-template-columns: 400px 1fr; gap: 25px; }
-        .panel { background: var(--white); padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
-        
-        h2 { font-size: 1.2rem; margin-top: 0; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        
-        input, select { font-family: 'Poppins'; width: 100%; padding: 12px; margin: 10px 0; border: 1.5px solid #ddd; border-radius: 10px; box-sizing: border-box; }
-        .trip-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #f8f9fa; padding: 10px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--primary); }
-        
-        .btn-save { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: 0.3s; }
-        .btn-save:hover { background: var(--dark); transform: translateY(-2px); }
+        .content-grid { display: grid; grid-template-columns: 380px 1fr; gap: 20px; }
+        .panel { background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: fit-content; }
+        h2 { font-size: 1.1rem; margin-top: 0; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
 
-        /* Scrolling Table Table */
-        .scroll-container { flex-grow: 1; overflow-y: auto; max-height: 500px; border: 1px solid #eee; border-radius: 10px; }
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { position: sticky; top: 0; background: #f1f8e9; z-index: 10; padding: 12px; border-bottom: 2px solid #ddd; }
-        td { padding: 12px; text-align: center; border-bottom: 1px solid #eee; }
-        
-        .badge { padding: 4px 8px; border-radius: 5px; color: white; font-size: 0.7rem; font-weight: bold; }
-        .bg-wet { background: #2e7d32; } .bg-mix { background: #d32f2f; }
-        .btn-wa { background: #25D366; color: white; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer; }
+        input, select { font-family: 'Poppins'; width: 100%; padding: 10px; margin: 8px 0; border: 1.5px solid #ddd; border-radius: 8px; box-sizing: border-box; }
+        .trip-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: #f9f9f9; padding: 10px; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid var(--primary); }
+        .btn-save { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: 600; width: 100%; cursor: pointer; font-size: 1rem; }
+
+        /* Scrollable Feed - Fixed Data Visibility */
+        .scroll-container { max-height: 600px; overflow-y: auto; padding-right: 5px; }
+        .entry-card { 
+            background: #fff; border: 1px solid #eee; border-radius: 10px; 
+            padding: 15px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+        .info b { font-size: 1rem; color: var(--dark); }
+        .info p { margin: 2px 0; font-size: 0.75rem; color: #666; }
+        .total-wt { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-left: 10px; }
+        .btn-wa { background: #25D366; color: white; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer; margin-left: 10px; font-size: 0.7rem; }
 
         @media (max-width: 1000px) { .content-grid { grid-template-columns: 1fr; } }
     </style>
@@ -60,15 +54,15 @@
         <img src="logo.png" alt="Logo" class="logo" onerror="this.style.display='none'">
         <div class="header-text">
             <h1>SUMEET ELKO</h1>
-            <p>Waste Management Tracking Solution</p>
+            <p>Motha Gaon Wet Waste Management</p>
         </div>
     </div>
 
     <div class="dashboard-grid">
-        <div class="stat-card"><h3>Today's Vehicles</h3><div id="today-v" class="value">0</div></div>
-        <div class="stat-card"><h3>Today's Weight</h3><div id="today-w" class="value">0 kg</div></div>
-        <div class="stat-card" style="border-color: var(--blue);"><h3>Total Vehicles</h3><div id="all-v" class="value" style="color: var(--blue);">0</div></div>
+        <div class="stat-card"><h3>Total Entries</h3><div id="all-v" class="value">0</div></div>
+        <div class="stat-card"><h3>Today's Entries</h3><div id="today-v" class="value">0</div></div>
         <div class="stat-card" style="border-color: var(--blue);"><h3>Total Weight</h3><div id="all-w" class="value" style="color: var(--blue);">0 kg</div></div>
+        <div class="stat-card" style="border-color: var(--blue);"><h3>Today's Weight</h3><div id="today-w" class="value" style="color: var(--blue);">0 kg</div></div>
     </div>
 
     <div class="content-grid">
@@ -77,12 +71,10 @@
             <form id="entryForm">
                 <input type="date" id="date" required>
                 <input type="text" id="sName" placeholder="Supervisor Name" required>
-                <input type="text" id="vehicle" placeholder="Vehicle No (e.g. MH05AB1234)" required>
-                
-                <div class="trip-row"><input type="number" id="t1" placeholder="T1 kg" value="0"><select id="ty1"><option value="Wet">Wet</option><option value="Mix">Mix</option></select></div>
-                <div class="trip-row"><input type="number" id="t2" placeholder="T2 kg" value="0"><select id="ty2"><option value="Wet">Wet</option><option value="Mix">Mix</option></select></div>
-                <div class="trip-row"><input type="number" id="t3" placeholder="T3 kg" value="0"><select id="ty3"><option value="Wet">Wet</option><option value="Mix">Mix</option></select></div>
-                
+                <input type="text" id="vehicle" placeholder="Vehicle No" required>
+                <div class="trip-row"><input type="number" id="t1" value="0"><select id="ty1"><option value="Wet">Wet</option><option value="Mix">Mix</option></select></div>
+                <div class="trip-row"><input type="number" id="t2" value="0"><select id="ty2"><option value="Wet">Wet</option><option value="Mix">Mix</option></select></div>
+                <div class="trip-row"><input type="number" id="t3" value="0"><select id="ty3"><option value="Wet">Wet</option><option value="Mix">Mix</option></select></div>
                 <input type="text" id="remark" placeholder="Remark / Ward">
                 <button type="submit" id="saveBtn" class="btn-save">Save Entry</button>
             </form>
@@ -91,111 +83,116 @@
         <div class="panel">
             <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom: 15px;">
                 <h2 style="margin:0; border:0;">Daily Report Feed</h2>
-                <input type="date" id="filterDate" style="width: 160px; margin:0;" onchange="renderDisplay()">
+                <input type="date" id="filterDate" style="width: 150px; margin:0;" onchange="renderDisplay()">
             </div>
-            <div id="syncStatus" style="font-size: 0.75rem; color: var(--blue); margin-bottom: 5px;">Connecting to cloud...</div>
-            
-            <div class="scroll-container">
-                <table>
-                    <thead>
-                        <tr><th>Vehicle</th><th>Trip 1</th><th>Trip 2</th><th>Trip 3</th><th>Total</th><th>WA</th></tr>
-                    </thead>
-                    <tbody id="tableBody"></tbody>
-                </table>
-            </div>
+            <div id="status" style="font-size: 0.7rem; color: var(--blue); margin-bottom: 10px;">Loading data from Google Sheets...</div>
+            <div class="scroll-container" id="feedList"></div>
         </div>
     </div>
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby83T4b1_vxik-A66f5tl58TVwyDQwDZCoVji6EvCCIIQt-FrYVo3Cb2-e3fEi3jrCavw/exec"; // PASTE YOUR URL HERE
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzU9rn2QhjFTHNCGuY3Qc7RMaPs3Izv5SE0EUBb_FmrJCDk3TQV9RlOHcZYSzv5NMLHOg/exec"; // PASTE URL HERE
     let masterData = [];
 
     document.getElementById('date').value = new Date().toISOString().split('T')[0];
     document.getElementById('filterDate').value = new Date().toISOString().split('T')[0];
 
-    async function syncData() {
-        const status = document.getElementById('syncStatus');
+    async function loadData() {
         try {
-            const res = await fetch(SCRIPT_URL);
-            masterData = await res.json();
+            const response = await fetch(SCRIPT_URL);
+            masterData = await response.json();
             renderDisplay();
-            status.innerText = "Cloud Synced: " + new Date().toLocaleTimeString();
+            document.getElementById('status').innerText = "Last Sync: " + new Date().toLocaleTimeString();
         } catch (e) {
-            status.innerText = "Sync Failed. Retrying...";
-            console.error(e);
+            document.getElementById('status').innerText = "Sync Error. Please check Script URL.";
         }
     }
 
     document.getElementById('entryForm').addEventListener('submit', async (e) => {
         e.preventDefault();
         const btn = document.getElementById('saveBtn');
-        btn.innerText = "Syncing..."; btn.disabled = true;
+        btn.innerText = "Saving..."; btn.disabled = true;
 
         const payload = {
             date: document.getElementById('date').value,
             sName: document.getElementById('sName').value,
             vehicle: document.getElementById('vehicle').value.toUpperCase(),
-            t1: parseFloat(document.getElementById('t1').value), ty1: document.getElementById('ty1').value,
-            t2: parseFloat(document.getElementById('t2').value), ty2: document.getElementById('ty2').value,
-            t3: parseFloat(document.getElementById('t3').value), ty3: document.getElementById('ty3').value,
+            t1: parseFloat(document.getElementById('t1').value) || 0,
+            t2: parseFloat(document.getElementById('t2').value) || 0,
+            t3: parseFloat(document.getElementById('t3').value) || 0,
+            ty1: document.getElementById('ty1').value, ty2: document.getElementById('ty2').value, ty3: document.getElementById('ty3').value,
             remark: document.getElementById('remark').value || "-"
         };
 
         try {
             await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-            alert("Success: Entry sent to Google Sheets!");
+            alert("Entry Saved!");
             e.target.reset();
             document.getElementById('date').value = new Date().toISOString().split('T')[0];
-            setTimeout(syncData, 2000);
-        } catch (err) {
-            alert("Error saving. Check Internet.");
-        }
+            setTimeout(loadData, 2000);
+        } catch (err) { alert("Error!"); }
         btn.innerText = "Save Entry"; btn.disabled = false;
     });
 
     function renderDisplay() {
-        const tbody = document.getElementById('tableBody');
-        const fDate = document.getElementById('filterDate').value;
-        tbody.innerHTML = '';
+        const feed = document.getElementById('feedList');
+        const filterDate = document.getElementById('filterDate').value;
+        feed.innerHTML = '';
         
-        let tV = 0, tW = 0, aW = 0;
+        let tV = 0, tW = 0, aV = 0, aW = 0;
 
-        masterData.forEach((item, idx) => {
-            const rowSum = (item.t1||0) + (item.t2||0) + (item.t3||0);
-            aW += rowSum;
+        // Sorting: Latest entries on top
+        const displayData = [...masterData].reverse();
 
-            // Date validation
+        displayData.forEach((item) => {
+            // Support both Capital/Small keys from Script
+            const v1 = parseFloat(item.t1 || item.T1 || 0);
+            const v2 = parseFloat(item.t2 || item.T2 || 0);
+            const v3 = parseFloat(item.t3 || item.T3 || 0);
+            const rowSum = v1 + v2 + v3;
+            
+            aV++; aW += rowSum;
+
+            // Date Check
             let itemDate = "";
-            try { itemDate = new Date(item.date).toISOString().split('T')[0]; } catch(e) { itemDate = item.date; }
+            try {
+                itemDate = new Date(item.date || item.Date).toISOString().split('T')[0];
+            } catch(e) { itemDate = ""; }
 
-            if(itemDate === fDate) {
+            // If date matches OR if you want to see all entries, they will be rendered here
+            if(itemDate === filterDate) {
                 tV++; tW += rowSum;
-                tbody.innerHTML += `<tr>
-                    <td><b>${item.vehicle}</b><br><small>${item.sName}</small></td>
-                    <td>${item.t1} <span class="badge ${item.ty1=='Wet'?'bg-wet':'bg-mix'}">${item.ty1}</span></td>
-                    <td>${item.t2} <span class="badge ${item.ty2=='Wet'?'bg-wet':'bg-mix'}">${item.ty2}</span></td>
-                    <td>${item.t3} <span class="badge ${item.ty3=='Wet'?'bg-wet':'bg-mix'}">${item.ty3}</span></td>
-                    <td><b>${rowSum} kg</b></td>
-                    <td><button class="btn-wa" onclick="sendWA(${idx})">WA</button></td>
-                </tr>`;
             }
+
+            // RENDERING ALL ENTRIES (So nothing is hidden)
+            feed.innerHTML += `
+                <div class="entry-card" style="${itemDate === filterDate ? 'border-left: 5px solid var(--primary); background: #f1f8e9;' : ''}">
+                    <div class="info">
+                        <b>${item.vehicle || item.Vehicle || 'N/A'}</b>
+                        <p>${itemDate} | ${item.sname || item.sName || item.Supervisor || '-'}</p>
+                        <small>${v1}kg(${item.ty1||'Wet'}), ${v2}kg(${item.ty2||'Mix'}), ${v3}kg(${item.ty3||'Wet'})</small>
+                    </div>
+                    <div style="display:flex; align-items:center;">
+                        <div class="total-wt">${rowSum} kg</div>
+                        <button class="btn-wa" onclick="sendWA('${item.vehicle}', ${rowSum})">WA</button>
+                    </div>
+                </div>`;
         });
 
+        document.getElementById('all-v').innerText = aV;
+        document.getElementById('all-w').innerText = aW + " kg";
         document.getElementById('today-v').innerText = tV;
         document.getElementById('today-w').innerText = tW + " kg";
-        document.getElementById('all-v').innerText = masterData.length;
-        document.getElementById('all-w').innerText = aW + " kg";
     }
 
-    function sendWA(idx) {
-        const i = masterData[idx];
-        const msg = `*SUMEET ELKO REPORT*%0AVehicle: ${i.vehicle}%0ATrip 1: ${i.t1} (${i.ty1})%0ATrip 2: ${i.t2} (${i.ty2})%0ATrip 3: ${i.t3} (${i.ty3})%0ATotal: ${i.t1+i.t2+i.t3} kg`;
+    function sendWA(vNo, total) {
+        const msg = `*SUMEET ELKO*%0AVehicle: ${vNo}%0ATotal Weight: ${total}kg`;
         window.open(`https://wa.me/?text=${msg}`, '_blank');
     }
 
-    syncData();
-    setInterval(syncData, 30000); // Auto-refresh every 30s
+    loadData();
+    setInterval(loadData, 30000);
 </script>
 </body>
 </html>
