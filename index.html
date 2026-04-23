@@ -1,108 +1,104 @@
 <!DOCTYPE html>
-<html lang="mr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sumeet Elko - Live Tracker</title>
+    <title>Sumeet Elko | Waste Management Pro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #1b5e20; --dark: #0a3d0d; --blue: #0d47a1; --bg: #f4f7f6; --white: #ffffff; --wa: #25D366; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); margin: 0; padding: 15px; }
-        .container { max-width: 1400px; margin: auto; }
+        :root { --primary: #1b5e20; --dark: #0a3d0d; --blue: #0d47a1; --bg: #f0f2f5; --white: #ffffff; }
         
-        /* Header with Logo */
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg); margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 1400px; margin: auto; }
+
+        /* Header */
         .main-header { 
             background: linear-gradient(135deg, var(--primary), var(--dark)); 
-            color: white; padding: 20px; border-radius: 15px; 
-            display: flex; align-items: center; justify-content: center; gap: 20px;
-            margin-bottom: 25px; box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            color: white; padding: 25px; border-radius: 15px; 
+            display: flex; align-items: center; justify-content: center; gap: 25px;
+            margin-bottom: 25px; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        .company-logo { height: 70px; width: auto; background: white; padding: 5px; border-radius: 8px; }
-        .header-text h1 { margin: 0; font-size: 2rem; letter-spacing: 1px; }
+        .logo { height: 65px; background: white; padding: 5px; border-radius: 10px; }
+        .header-text h1 { margin: 0; font-size: 2.2rem; letter-spacing: 1px; }
         .header-text p { margin: 0; opacity: 0.8; font-size: 0.9rem; }
 
         /* Dashboard */
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
-        .stat-card { background: var(--white); padding: 20px; border-radius: 15px; text-align: center; border-top: 5px solid var(--primary); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .stat-card h3 { margin: 0; font-size: 0.85rem; color: #666; }
-        .value { font-size: 1.8rem; font-weight: bold; margin-top: 10px; color: var(--dark); }
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .stat-card { background: var(--white); padding: 20px; border-radius: 15px; text-align: center; border-bottom: 5px solid var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+        .stat-card h3 { margin: 0; font-size: 0.8rem; color: #777; text-transform: uppercase; }
+        .value { font-size: 1.8rem; font-weight: 700; margin-top: 8px; color: var(--dark); }
 
-        /* Main Content */
-        .content-grid { display: grid; grid-template-columns: 380px 1fr; gap: 20px; }
-        .panel { background: var(--white); padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        h2 { margin-top: 0; font-size: 1.2rem; color: var(--dark); border-bottom: 2px solid #f0f0f0; padding-bottom: 10px; }
-
-        input, select { width: 100%; padding: 10px; margin: 8px 0; border: 1.5px solid #eee; border-radius: 8px; box-sizing: border-box; }
-        .trip-box { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: #f9f9f9; padding: 10px; border-radius: 10px; margin-bottom: 8px; border-left: 4px solid var(--primary); }
+        /* Content */
+        .content-grid { display: grid; grid-template-columns: 400px 1fr; gap: 25px; }
+        .panel { background: var(--white); padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flex-direction: column; }
         
-        .btn-save { background: var(--primary); color: white; border: none; padding: 15px; width: 100%; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 1.1rem; }
-        .btn-save:disabled { background: #888; }
+        h2 { font-size: 1.2rem; margin-top: 0; color: var(--primary); border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        
+        input, select { font-family: 'Poppins'; width: 100%; padding: 12px; margin: 10px 0; border: 1.5px solid #ddd; border-radius: 10px; box-sizing: border-box; }
+        .trip-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; background: #f8f9fa; padding: 10px; border-radius: 10px; margin-bottom: 10px; border-left: 4px solid var(--primary); }
+        
+        .btn-save { background: var(--primary); color: white; border: none; padding: 15px; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: 0.3s; }
+        .btn-save:hover { background: var(--dark); transform: translateY(-2px); }
 
-        /* Table */
-        .table-container { overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
-        th { background: #f1f8e9; padding: 12px; border-bottom: 2px solid #ddd; text-align: center; }
+        /* Scrolling Table Table */
+        .scroll-container { flex-grow: 1; overflow-y: auto; max-height: 500px; border: 1px solid #eee; border-radius: 10px; }
+        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+        th { position: sticky; top: 0; background: #f1f8e9; z-index: 10; padding: 12px; border-bottom: 2px solid #ddd; }
         td { padding: 12px; text-align: center; border-bottom: 1px solid #eee; }
         
-        .badge { padding: 3px 7px; border-radius: 4px; color: white; font-size: 0.7rem; font-weight: bold; }
-        .btn-wa { background: var(--wa); border: none; padding: 6px 10px; border-radius: 5px; color: white; cursor: pointer; }
+        .badge { padding: 4px 8px; border-radius: 5px; color: white; font-size: 0.7rem; font-weight: bold; }
+        .bg-wet { background: #2e7d32; } .bg-mix { background: #d32f2f; }
+        .btn-wa { background: #25D366; color: white; border: none; padding: 6px 10px; border-radius: 5px; cursor: pointer; }
 
-        @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 1000px) { .content-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="main-header">
-        <img src="logo.png" alt="Logo" class="company-logo" onerror="this.style.display='none'">
+        <img src="logo.png" alt="Logo" class="logo" onerror="this.style.display='none'">
         <div class="header-text">
             <h1>SUMEET ELKO</h1>
-            <p>Waste Tracking & Monitoring | Mothe Gaon</p>
+            <p>Waste Management Tracking Solution</p>
         </div>
     </div>
 
     <div class="dashboard-grid">
-        <div class="stat-card"><h3>आजच्या गाड्या</h3><div id="today-v" class="value">0</div></div>
-        <div class="stat-card"><h3>आजचे वजन</h3><div id="today-w" class="value">0 kg</div></div>
-        <div class="stat-card" style="border-top-color: var(--blue);"><h3>एकूण गाड्या</h3><div id="all-v" class="value" style="color:var(--blue)">0</div></div>
-        <div class="stat-card" style="border-top-color: var(--blue);"><h3>एकूण वजन</h3><div id="all-w" class="value" style="color:var(--blue)">0 kg</div></div>
+        <div class="stat-card"><h3>Today's Vehicles</h3><div id="today-v" class="value">0</div></div>
+        <div class="stat-card"><h3>Today's Weight</h3><div id="today-w" class="value">0 kg</div></div>
+        <div class="stat-card" style="border-color: var(--blue);"><h3>Total Vehicles</h3><div id="all-v" class="value" style="color: var(--blue);">0</div></div>
+        <div class="stat-card" style="border-color: var(--blue);"><h3>Total Weight</h3><div id="all-w" class="value" style="color: var(--blue);">0 kg</div></div>
     </div>
 
     <div class="content-grid">
         <div class="panel">
-            <h2>नवी एन्ट्री</h2>
-            <form id="wasteForm">
+            <h2>New Entry</h2>
+            <form id="entryForm">
                 <input type="date" id="date" required>
-                <input type="text" id="sName" placeholder="सुपरवायझरचे नाव" required>
-                <input type="text" id="vehicle" placeholder="उदा. MH 05 AB 1234" required>
+                <input type="text" id="sName" placeholder="Supervisor Name" required>
+                <input type="text" id="vehicle" placeholder="Vehicle No (e.g. MH05AB1234)" required>
                 
-                <div class="trip-box">
-                    <input type="number" id="t1" placeholder="Trip 1 (kg)" value="0">
-                    <select id="ty1"><option value="Wet">Wet</option><option value="Mix">Mix</option></select>
-                </div>
-                <div class="trip-box" style="border-left-color: var(--blue);">
-                    <input type="number" id="t2" placeholder="Trip 2 (kg)" value="0">
-                    <select id="ty2"><option value="Wet">Wet</option><option value="Mix">Mix</option></select>
-                </div>
-                <div class="trip-box" style="border-left-color: #d32f2f;">
-                    <input type="number" id="t3" placeholder="Trip 3 (kg)" value="0">
-                    <select id="ty3"><option value="Wet">Wet</option><option value="Mix">Mix</option></select>
-                </div>
-
-                <input type="text" id="remark" placeholder="रिमार्क / वॉर्ड">
-                <button type="submit" id="submitBtn" class="btn-save">डेटा सेव्ह करा</button>
+                <div class="trip-row"><input type="number" id="t1" placeholder="T1 kg" value="0"><select id="ty1"><option value="Wet">Wet</option><option value="Mix">Mix</option></select></div>
+                <div class="trip-row"><input type="number" id="t2" placeholder="T2 kg" value="0"><select id="ty2"><option value="Wet">Wet</option><option value="Mix">Mix</option></select></div>
+                <div class="trip-row"><input type="number" id="t3" placeholder="T3 kg" value="0"><select id="ty3"><option value="Wet">Wet</option><option value="Mix">Mix</option></select></div>
+                
+                <input type="text" id="remark" placeholder="Remark / Ward">
+                <button type="submit" id="saveBtn" class="btn-save">Save Entry</button>
             </form>
         </div>
 
         <div class="panel">
-            <div style="display:flex; justify-content: space-between; align-items:center;">
-                <h2>दैनिक रिपोर्ट</h2>
-                <input type="date" id="filterDate" style="width:150px;" onchange="renderTable()">
+            <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom: 15px;">
+                <h2 style="margin:0; border:0;">Daily Report Feed</h2>
+                <input type="date" id="filterDate" style="width: 160px; margin:0;" onchange="renderDisplay()">
             </div>
-            <div id="loading" style="color: var(--blue); font-size: 0.8rem; margin: 10px 0;">डेटा लोड होत आहे...</div>
-            <div class="table-container">
+            <div id="syncStatus" style="font-size: 0.75rem; color: var(--blue); margin-bottom: 5px;">Connecting to cloud...</div>
+            
+            <div class="scroll-container">
                 <table>
                     <thead>
-                        <tr><th>गाडी क्रमांक</th><th>T1</th><th>T2</th><th>T3</th><th>एकूण</th><th>WA</th></tr>
+                        <tr><th>Vehicle</th><th>Trip 1</th><th>Trip 2</th><th>Trip 3</th><th>Total</th><th>WA</th></tr>
                     </thead>
                     <tbody id="tableBody"></tbody>
                 </table>
@@ -112,107 +108,94 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzjDdoGyqxPO6hMx-X4eqDWg01bRoPgRZahLE2bZKdaKfSxPt1H6oKCNDV5WCdpovIgsg/exec"; // तुमची Google Script URL इथे टाका
-    let fullData = [];
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycby83T4b1_vxik-A66f5tl58TVwyDQwDZCoVji6EvCCIIQt-FrYVo3Cb2-e3fEi3jrCavw/exec"; // PASTE YOUR URL HERE
+    let masterData = [];
 
-    // डिफॉल्ट तारीख सेट करणे
     document.getElementById('date').value = new Date().toISOString().split('T')[0];
     document.getElementById('filterDate').value = new Date().toISOString().split('T')[0];
 
-    // क्लाउडवरून डेटा खेचणे
-    async function loadData() {
-        const loader = document.getElementById('loading');
-        loader.style.display = "block";
+    async function syncData() {
+        const status = document.getElementById('syncStatus');
         try {
             const res = await fetch(SCRIPT_URL);
-            const data = await res.json();
-            if (data) {
-                fullData = data;
-                renderTable();
-                loader.innerText = "डेटा अपडेट झाला आहे.";
-            }
+            masterData = await res.json();
+            renderDisplay();
+            status.innerText = "Cloud Synced: " + new Date().toLocaleTimeString();
         } catch (e) {
-            loader.innerText = "डेटा लोड करताना त्रुटी आली.";
+            status.innerText = "Sync Failed. Retrying...";
             console.error(e);
         }
-        setTimeout(() => loader.style.display = "none", 2000);
     }
 
-    // फॉर्म सबमिट करणे
-    document.getElementById('wasteForm').addEventListener('submit', async (e) => {
+    document.getElementById('entryForm').addEventListener('submit', async (e) => {
         e.preventDefault();
-        const btn = document.getElementById('submitBtn');
-        btn.innerText = "Processing..."; btn.disabled = true;
+        const btn = document.getElementById('saveBtn');
+        btn.innerText = "Syncing..."; btn.disabled = true;
 
         const payload = {
             date: document.getElementById('date').value,
             sName: document.getElementById('sName').value,
             vehicle: document.getElementById('vehicle').value.toUpperCase(),
-            t1: parseFloat(document.getElementById('t1').value) || 0, ty1: document.getElementById('ty1').value,
-            t2: parseFloat(document.getElementById('t2').value) || 0, ty2: document.getElementById('ty2').value,
-            t3: parseFloat(document.getElementById('t3').value) || 0, ty3: document.getElementById('ty3').value,
+            t1: parseFloat(document.getElementById('t1').value), ty1: document.getElementById('ty1').value,
+            t2: parseFloat(document.getElementById('t2').value), ty2: document.getElementById('ty2').value,
+            t3: parseFloat(document.getElementById('t3').value), ty3: document.getElementById('ty3').value,
             remark: document.getElementById('remark').value || "-"
         };
 
         try {
             await fetch(SCRIPT_URL, { method: 'POST', mode: 'no-cors', body: JSON.stringify(payload) });
-            alert("Entry Saved Successfully!");
+            alert("Success: Entry sent to Google Sheets!");
             e.target.reset();
             document.getElementById('date').value = new Date().toISOString().split('T')[0];
-            // सेव्ह झाल्यावर ५ सेकंदांनी रिफ्रेश करा
-            setTimeout(loadData, 5000);
+            setTimeout(syncData, 2000);
         } catch (err) {
-            alert("Error saving data.");
+            alert("Error saving. Check Internet.");
         }
-        btn.innerText = "डेटा सेव्ह करा"; btn.disabled = false;
+        btn.innerText = "Save Entry"; btn.disabled = false;
     });
 
-    // टेबल आणि डॅशबोर्ड रेंडर करणे
-    function renderTable() {
+    function renderDisplay() {
         const tbody = document.getElementById('tableBody');
         const fDate = document.getElementById('filterDate').value;
         tbody.innerHTML = '';
         
         let tV = 0, tW = 0, aW = 0;
 
-        fullData.forEach((item, index) => {
-            const totalRow = (item.t1 || 0) + (item.t2 || 0) + (item.t3 || 0);
-            aW += totalRow;
+        masterData.forEach((item, idx) => {
+            const rowSum = (item.t1||0) + (item.t2||0) + (item.t3||0);
+            aW += rowSum;
 
-            // तारीख चेक (Google Sheet मध्ये तारीख फॉरमॅट वेगळा असू शकतो)
-            let itemD = "";
-            try { itemD = new Date(item.date).toISOString().split('T')[0]; } catch(e) { itemD = item.date; }
+            // Date validation
+            let itemDate = "";
+            try { itemDate = new Date(item.date).toISOString().split('T')[0]; } catch(e) { itemDate = item.date; }
 
-            if (itemD === fDate) {
-                tV++;
-                tW += totalRow;
+            if(itemDate === fDate) {
+                tV++; tW += rowSum;
                 tbody.innerHTML += `<tr>
                     <td><b>${item.vehicle}</b><br><small>${item.sName}</small></td>
-                    <td>${item.t1} <span class="badge ${item.ty1=='Wet'?'bg-wet':'bg-mix'}" style="background:${item.ty1=='Wet'?'#2e7d32':'#d32f2f'}">${item.ty1}</span></td>
-                    <td>${item.t2} <span class="badge ${item.ty2=='Wet'?'bg-wet':'bg-mix'}" style="background:${item.ty2=='Wet'?'#2e7d32':'#d32f2f'}">${item.ty2}</span></td>
-                    <td>${item.t3} <span class="badge ${item.ty3=='Wet'?'bg-wet':'bg-mix'}" style="background:${item.ty3=='Wet'?'#2e7d32':'#d32f2f'}">${item.ty3}</span></td>
-                    <td><b>${totalRow} kg</b></td>
-                    <td><button class="btn-wa" onclick="sendWA(${index})">WA</button></td>
+                    <td>${item.t1} <span class="badge ${item.ty1=='Wet'?'bg-wet':'bg-mix'}">${item.ty1}</span></td>
+                    <td>${item.t2} <span class="badge ${item.ty2=='Wet'?'bg-wet':'bg-mix'}">${item.ty2}</span></td>
+                    <td>${item.t3} <span class="badge ${item.ty3=='Wet'?'bg-wet':'bg-mix'}">${item.ty3}</span></td>
+                    <td><b>${rowSum} kg</b></td>
+                    <td><button class="btn-wa" onclick="sendWA(${idx})">WA</button></td>
                 </tr>`;
             }
         });
 
         document.getElementById('today-v').innerText = tV;
         document.getElementById('today-w').innerText = tW + " kg";
-        document.getElementById('all-v').innerText = fullData.length;
+        document.getElementById('all-v').innerText = masterData.length;
         document.getElementById('all-w').innerText = aW + " kg";
     }
 
     function sendWA(idx) {
-        const i = fullData[idx];
-        const msg = `*SUMEET ELKO REPORT*%0AVehicle: ${i.vehicle}%0ATotal: ${i.t1+i.t2+i.t3} kg%0ARemark: ${i.remark}`;
+        const i = masterData[idx];
+        const msg = `*SUMEET ELKO REPORT*%0AVehicle: ${i.vehicle}%0ATrip 1: ${i.t1} (${i.ty1})%0ATrip 2: ${i.t2} (${i.ty2})%0ATrip 3: ${i.t3} (${i.ty3})%0ATotal: ${i.t1+i.t2+i.t3} kg`;
         window.open(`https://wa.me/?text=${msg}`, '_blank');
     }
 
-    // ऑटो लोड
-    loadData();
-    // दर मिनिटाला ऑटो रिफ्रेश
-    setInterval(loadData, 60000);
+    syncData();
+    setInterval(syncData, 30000); // Auto-refresh every 30s
 </script>
 </body>
 </html>
